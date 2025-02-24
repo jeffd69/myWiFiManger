@@ -1441,7 +1441,7 @@ void WiFiManager::handleParam(){
   if(_showBack) page += FPSTR(HTTP_BACKBTN);
   reportStatus(page);
   page += getHTTPEnd();
-
+  page += "<br>ciccio<br>";
   HTTPSend(page);
 
   #ifdef WM_DEBUG_LEVEL
