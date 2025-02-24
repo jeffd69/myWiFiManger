@@ -1352,6 +1352,9 @@ void WiFiManager::handleRoot() {
   str.replace(FPSTR(T_t),_title);
   str.replace(FPSTR(T_v),configPortalActive ? _apName : (getWiFiHostname() + " - " + WiFi.localIP().toString())); // use ip if ap is not active for heading @todo use hostname?
   page += str;
+  page += "<h3>";
+  page += WiFi.macAddress();
+  page +="</h3>";
   page += FPSTR(HTTP_PORTAL_OPTIONS);
   page += getMenuOut();
   reportStatus(page);
@@ -1440,8 +1443,8 @@ void WiFiManager::handleParam(){
   page += FPSTR(HTTP_FORM_END);
   if(_showBack) page += FPSTR(HTTP_BACKBTN);
   reportStatus(page);
+  
   page += getHTTPEnd();
-  page += "<br>ciccio<br>";
   HTTPSend(page);
 
   #ifdef WM_DEBUG_LEVEL
