@@ -252,6 +252,8 @@ class WiFiManager
     ~WiFiManager();
     void WiFiManagerInit();
 
+    void setCustomDeviceName(String device_name);
+
     // auto connect to saved wifi, or custom, and start config portal on failures
     boolean       autoConnect();
     boolean       autoConnect(char const *apName, char const *apPassword = NULL);
@@ -608,6 +610,8 @@ class WiFiManager
     String        _bodyClass              = ""; // class to add to body
     String        _title                  = FPSTR(S_brand); // app title -  default WiFiManager
 
+    String        _custom_dev_name        = ""; // custom name of device
+
     // internal options
     
     // wifiscan notes
@@ -634,7 +638,7 @@ public:
     boolean       _asyncScan              = false; // perform wifi network scan async
     
 protected:
-
+    
     boolean       _autoforcerescan        = false;  // automatically force rescan if scan networks is 0, ignoring cache
     
     boolean       _disableIpFields        = false; // modify function of setShow_X_Fields(false), forces ip fields off instead of default show if set, eg. _staShowStaticFields=-1

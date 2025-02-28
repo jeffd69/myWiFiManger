@@ -1338,6 +1338,11 @@ void WiFiManager::handleRequest() {
   }
 }
 
+void WiFiManager::setCustomDeviceName(String device_name) {
+ _custom_dev_name = device_name;
+}
+
+
 /** 
  * HTTPD CALLBACK root or redirect to captive portal
  */
@@ -1352,9 +1357,14 @@ void WiFiManager::handleRoot() {
   str.replace(FPSTR(T_t),_title);
   str.replace(FPSTR(T_v),configPortalActive ? _apName : (getWiFiHostname() + " - " + WiFi.localIP().toString())); // use ip if ap is not active for heading @todo use hostname?
   page += str;
-  page += "<h3>";
+  page += "<h4>";
+  if( _custom_dev_name != "") {
+    page += " ";
+    page += _custom_dev_name;
+    page += " ";
+  }
   page += WiFi.macAddress();
-  page +="</h3>";
+  page +="</h4>";
   page += FPSTR(HTTP_PORTAL_OPTIONS);
   page += getMenuOut();
   reportStatus(page);
